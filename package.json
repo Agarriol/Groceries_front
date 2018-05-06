@@ -1,0 +1,44 @@
+{
+  "name": "tutorial",
+  "version": "0.1.0",
+  "description": "tutorial proyect",
+  "main": "dist/tutorial.js",
+  "scripts": {
+    "dist": "check-dependencies && webpack --env production --optimize-minimize",
+    "start": "check-dependencies && webpack-dev-server --env development --inline --hot --host 0.0.0.0",
+    "g": "check-dependencies && node node_modules/ns-generator/generator.js"
+  },
+  "author": "NSS",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^2.5.3",
+    "jquery": "^3.3.1",
+    "uglify-js": "^3.3.11",
+    "vue": "^2.5.13",
+    "vue-i18n": "^7.4.2",
+    "vue-resource": "^1.4.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "check-dependencies": "^1.1.0",
+    "clean-webpack-plugin": "^0.1.18",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.9",
+    "html-webpack-plugin": "^2.30.1",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.7.2",
+    "pug": "^2.0.0-rc.4",
+    "pug-loader": "^2.3.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
