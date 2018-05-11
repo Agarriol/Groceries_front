@@ -1,10 +1,22 @@
 div
-  h4 Ejemplo de componente
+  h4 Registrar usuario
 
-  table
-    tr
-      th Nombre
-      th Email
-    tr(v-for="user in users")
-      td {{user.name}}
-      td {{user.email}}
+  form(@submit.prevent="addUser")
+    p(v-if="errors.length")
+      b Please correct the following error(s)
+      ul
+        li(v-for="error in errors") {{error}}
+    p
+      label(for="name") Nombre 
+      input(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.nameHasError}")
+    p
+      label(for="email") Email 
+      input(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.emailHasError}")
+    p
+      label(for="password") Password 
+      input(type="text" name="password" id="password" v-model="password" v-bind:class="{ 'error': errorsVar.passwordHasError}")
+    p
+      label(for="passwordConfirm") Confirm password 
+      input(type="text" name="passwordConfirm" id="passwordConfirm" v-model="passwordConfirm" v-bind:class="{ 'error': errorsVar.passwordConfirmHasError}")
+    p
+      input(type="submit", name="", value="Enviar")

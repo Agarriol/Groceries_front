@@ -1,0 +1,8 @@
+{
+  "es": {
+    "loginPage": {
+      "credentials": "Las credenciales están mal",
+      "loginUser": "Introduzca sus datos para iniciar sesion. "
+    }
+  }
+}

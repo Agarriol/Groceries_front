@@ -1,5 +1,16 @@
 {
   "es": {
-    "examaple": "Texto de ejemplo"
+    "applicationTitle": "Groceries",
+    "loginOut": "Cerrar sesión",
+    "changeCorrect": "Los cambios se han guardado correctamente",
+    "name": "Nombre ",
+    "email": "Email ",
+    "login": "Login ",
+    "password": "Contraseña ",
+    "passwordConfirm": "Confirmar contraseña ",
+    "passwordNew": "Nueva contraseña ",
+    "register": "Registro ",
+    "reviseErrors": "Debe corregir los siguientes errores:",
+    "send": "Enviar"
   }
 }

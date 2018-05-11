@@ -1,6 +1,27 @@
 div
-  h1 Home
+  #example-component 
+  div
+    h2 {{$t ("home.UserRegister")}}
 
-  img(src=require('assets/images/logo.png'))
+    form(@submit.prevent="addUser" v-if='registration == false')
+      p(v-if="errors.length")
+        b {{$t ("reviseErrors")}}
+        ul
+          li(v-for="error in errors") {{error}}
+      p
+        label(for="name") {{$t ("name")}} 
+        input(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.nameHasError}")
+      p
+        label(for="email") {{$t ("email")}} 
+        input(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.emailHasError}")
+      p
+        label(for="password") {{$t ("password")}} 
+        input(type="text" name="password" id="password" v-model="password" v-bind:class="{ 'error': errorsVar.passwordHasError}")
+      p
+        label(for="passwordConfirm") {{$t ("passwordConfirm")}}
+        input(type="text" name="passwordConfirm" id="passwordConfirm" v-model="passwordConfirm" v-bind:class="{ 'error': errorsVar.passwordConfirmHasError}")
+      p
+        input(type="submit" name="" v-html="$t('send')")
 
-  example-component
+    p(v-else='registration == true') {{$t ("home.registerCorrect")}}
+      <router-link to="/login"> {{$t ("Login")}}</router-link>

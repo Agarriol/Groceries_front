@@ -1,6 +1,8 @@
 import VueResource from 'vue-resource';
 
 import DefaultLayout from 'js/layouts/default';
+import LoginLayout from 'js/layouts/login';
+import RegisterLayout from 'js/layouts/register';
 
 import router from 'js/router.js';
 import store from 'js/vuex/store.js';
@@ -26,5 +28,7 @@ new Vue({
   i18n,
   components: {
     DefaultLayout,
+    LoginLayout,
+    RegisterLayout
   }
 }).$mount('#app');

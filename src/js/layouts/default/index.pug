@@ -1,2 +1,6 @@
-#layout_default
+div
+  h1 {{$t ("applicationTitle")}}
+
+  p {{users.userName}}
+    <button v-on:click="loginOut()">{{$t ("loginOut")}}</button> 
   router-view

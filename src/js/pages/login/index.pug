@@ -1,0 +1,18 @@
+div
+  div
+    h2 {{$t ("loginPage.loginUser")}}
+
+    form(@submit.prevent="addUser")
+      p(v-if="errors.length")
+        b {{$t ("reviseErrors")}}
+        ul
+          li(v-for="error in errors") {{error}}
+      p
+        label(for="email") {{$t ("email")}}  
+        input(type="text" name="email" id="email" v-model="email")
+      p
+        label(for="password") {{$t ("password")}}  
+        input(type="text" name="password" id="password" v-model="password")
+      p
+        input(type="submit" name="" v-html="$t('send')")
+

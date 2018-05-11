@@ -2,6 +2,9 @@ import VueRouter from 'vue-router';
 
 // Pages
 import Home from './pages/home/index.js';
+import Login from './pages/login/index.js';
+import List from './pages/list/index.js';
+import Profile from './pages/profile/index.js';
 
 // Le indicamos a Vue que use VueRouter
 Vue.use(VueRouter);
@@ -18,6 +21,30 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    meta: {
+      layout: 'register'
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      layout: 'login'
+    }
+  },
+  {
+    path: '/list',
+    name: 'list',
+    component: List,
+    meta: {
+      layout: 'default'
+    }
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
     meta: {
       layout: 'default'
     }
