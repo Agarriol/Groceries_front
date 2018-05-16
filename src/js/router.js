@@ -22,7 +22,8 @@ const routes = [
     name: 'home',
     component: Home,
     meta: {
-      layout: 'register'
+      layout: 'register',
+      requiresToken: false
     }
   },
   {
@@ -30,7 +31,8 @@ const routes = [
     name: 'login',
     component: Login,
     meta: {
-      layout: 'login'
+      layout: 'login',
+      requiresToken: false
     }
   },
   {
@@ -38,7 +40,8 @@ const routes = [
     name: 'list',
     component: List,
     meta: {
-      layout: 'default'
+      layout: 'default',
+      requiresToken: true
     }
   },
   {
@@ -46,7 +49,8 @@ const routes = [
     name: 'profile',
     component: Profile,
     meta: {
-      layout: 'default'
+      layout: 'default',
+      requiresToken: true
     }
   },
   {
@@ -59,5 +63,33 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({routes});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresToken)) {
+    if (localStorage.getItem('token')) {
+      API.user.show(JSON.parse(atob(localStorage.getItem('token').split('.')[1])).userId, {
+        headers: {
+          Authorization: 'Bearer '+ localStorage.getItem('token')
+        }
+      }).then(response => {
+        Vue.store.dispatch('saveUser', {
+          email: response.email,
+          name: response.name,
+          id: response.id,
+          token: localStorage.getItem('token')
+        });
+        next();
+      }, response => {
+        next();
+      });
+    } else {
+      next({
+        path: '/login'
+      });
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

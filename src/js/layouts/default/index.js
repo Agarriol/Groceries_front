@@ -19,7 +19,6 @@ export default Vue.extend({
       'deleteUser'
     ]),
     loginOut: function loginOut() {
-      console.log(this.users.userToken);
       API.user.deleteSession({headers: {Authorization: 'Bearer '+ this.users.userToken}}).then(response => {
 
         if (response.status === 204) {
@@ -27,8 +26,10 @@ export default Vue.extend({
           this.$store.dispatch('deleteUser');
           router.push('/login');
         } else {
-          // TODO, ha ido mal la desconexión
+          router.push('/login');
         }
+      }, response => {
+        router.push('/login');
       });
     }
   },

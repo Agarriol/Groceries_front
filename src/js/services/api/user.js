@@ -8,6 +8,8 @@ export default {
   show(id, params) {
     return Vue.http.get(`http://localhost:3000/users/${id}`, params).then(response => {
       return response.data;
+    }, response => {
+      return Promise.reject(response);
     });
   },
 
@@ -46,8 +48,9 @@ export default {
     const sendData = data; // instanceof FormData ? data : {data};
 
     return Vue.http.delete('http://localhost:3000/session', sendData).then(response => {
-
       return response;
+    }, response => {
+      return Promise.reject(response);
     });
   }
 };

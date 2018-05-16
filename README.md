@@ -2,6 +2,15 @@
 
 Vue.js skeleton made with webpack.
 
+# GROCERIES
+
+## Como ejecutarlo:
+	- En el terminal hay que iniciar el servidor , con 'yarn start'.
+	- En un navegador, acceder a localhost:8000.
+
+## Como ejecutar los test:
+	- En el terminal: 'yarn cypress run'
+
+## Fallos
 Fallos: 
-	registrer: al comprobar que password = passwordConfirm, si a=b y luego ''='', sigue dando el error.
 	Cerrar sesioón: que hacer si falla.
