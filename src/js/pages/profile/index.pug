@@ -26,4 +26,4 @@ div
         label(for="passwordNewConfirm") {{$t ("passwordConfirm")}}  
         input(type="text" name="passwordNewConfirm" id="passwordNewConfirm" v-model="passwordNewConfirm" v-bind:class="{ 'error': errorsVar.passwordNewConfirmHasError}")
       p
-        input(type="submit" name="" v-html="$t('send')")
+        input(type="submit" name="save_button" v-html="$t('send')")

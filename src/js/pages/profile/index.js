@@ -28,7 +28,7 @@ export default Vue.extend({
   },
   methods: {
     addData: function addData() {
-      if (this.passwordCurrent !== null) {
+      if (this.passwordCurrent !== null || this.passwordNew !== null || this.passwordNewConfirm !== null) {
         this.updateData.user = {
           name: this.name,
           email: this.email,

@@ -21,7 +21,7 @@ div
         label(for="passwordConfirm") {{$t ("passwordConfirm")}}
         input(type="text" name="passwordConfirm" id="passwordConfirm" v-model="passwordConfirm" v-bind:class="{ 'error': errorsVar.passwordConfirmHasError}")
       p
-        input(type="submit" name="" v-html="$t('send')")
+        input(type="submit" name="save_button" v-html="$t('send')")
 
     p(v-else='registration == true') {{$t ("home.registerCorrect")}}
-      <router-link to="/login"> {{$t ("Login")}}</router-link>
+      <router-link to="/login"> {{$t ("login")}}</router-link>

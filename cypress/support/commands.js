@@ -23,3 +23,21 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('load_user', (method, user) => {
+  cy.server();
+  cy.route({
+    method,
+    url: 'users/*',
+    response: `fixture:${user}`
+  });
+});
+
+Cypress.Commands.add('calls', (method, urlValue, responseValue) => {
+  cy.server();
+  cy.route({
+    method,
+    url: urlValue,
+    response: responseValue
+  });
+});

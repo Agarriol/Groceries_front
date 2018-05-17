@@ -42,7 +42,7 @@ export default Vue.extend({
 
           response.data.errors = Object.keys(response.data.errors);
 
-          this.errors.push(response.data.errors);
+          //this.errors.push(response.data.errors);
           for (let i = 0; i < response.data.errors.length; i++) {
             this.errors.push(response.data.errors[i]);
             // TODO, esto se tiene que poder hacer con un bucle
