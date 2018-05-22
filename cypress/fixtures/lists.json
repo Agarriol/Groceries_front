@@ -1,0 +1,100 @@
+{
+  "data":[
+    {
+      "id": 1,
+      "title": "Lista 1",
+      "description": "ESta es la lista 1",
+      "state": null,
+      "user_id": 1,
+      "created_at": "2018-05-17T12:58:17.823Z",
+      "updated_at": "2018-05-17T12:58:17.823Z"
+    },
+    {
+      "id": 2,
+      "title": "Lista 2",
+      "description": "a",
+      "state": false,
+      "user_id": 2,
+      "created_at": "2018-05-17T15:10:34.757Z",
+      "updated_at": "2018-05-17T15:10:34.757Z"
+    },
+    {
+      "id": 3,
+      "title": "Lista 3",
+      "description": "ESta es la lista 3",
+      "state": true,
+      "user_id": 1,
+      "created_at": "2018-05-17T15:21:33.922Z",
+      "updated_at": "2018-05-17T15:21:33.922Z"
+    },
+    {
+      "id": 4,
+      "title": "Lista 4",
+      "description": "ESta es la lista 3",
+      "state": false,
+      "user_id": 2,
+      "created_at": "2018-05-17T15:24:40.752Z",
+      "updated_at": "2018-05-17T15:24:40.752Z"
+    },
+    {
+      "id": 5,
+      "title": "Lista 5",
+      "description": "ESta es la lista 3",
+      "state": false,
+      "user_id": 2,
+      "created_at": "2018-05-17T15:26:40.965Z",
+      "updated_at": "2018-05-17T15:26:40.965Z"
+    },
+    {
+      "id": 6,
+      "title": "Lista 6",
+      "description": "ESta es la lista 3",
+      "state": true,
+      "user_id": 2,
+      "created_at": "2018-05-17T15:27:31.601Z",
+      "updated_at": "2018-05-17T15:27:31.601Z"
+    },
+    {
+      "id": 7,
+      "title": "Lista 7",
+      "description": "ESta es la lista 3",
+      "state": true,
+      "user_id": 2,
+      "created_at": "2018-05-16T15:30:37.642Z",
+      "updated_at": "2018-05-17T15:30:37.642Z"
+    },
+    {
+      "id": 50,
+      "title": "Lista 26",
+      "description": "ESta es la lista 3",
+      "state": true,
+      "user_id": 21,
+      "created_at": "2018-05-22T09:38:36.063Z",
+      "updated_at": "2018-05-22T09:38:36.063Z"
+    },
+    {
+      "id": 51,
+      "title": "asdf4444",
+      "description": "asdf",
+      "state": true,
+      "user_id": 21,
+      "created_at": "2018-05-22T15:35:44.914Z",
+      "updated_at": "2018-05-22T15:35:44.914Z"
+    },
+    {
+      "id": 52,
+      "title": "asdf4444",
+      "description": "asdf",
+      "state": true,
+      "user_id": 21,
+      "created_at": "2018-05-22T15:36:13.582Z",
+      "updated_at": "2018-05-22T15:36:13.582Z"
+    }
+  ],
+  "meta":{
+    "current_page": 1,
+    "total_pages": 2,
+    "page_size": 10,
+    "total_elements": 11
+  }
+}

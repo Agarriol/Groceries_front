@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import Home from './pages/home/index.js';
 import Login from './pages/login/index.js';
 import List from './pages/list/index.js';
+import createList from './pages/list/create.js';
+import showList from './pages/list/show.js';
 import Profile from './pages/profile/index.js';
 
 // Le indicamos a Vue que use VueRouter
@@ -39,6 +41,24 @@ const routes = [
     path: '/list',
     name: 'list',
     component: List,
+    meta: {
+      layout: 'default',
+      requiresToken: true
+    }
+  },
+  {
+    path: '/list/show/:id',
+    name: 'showList',
+    component: showList,
+    meta: {
+      layout: 'default',
+      requiresToken: true
+    }
+  },
+  {
+    path: '/list/create',
+    name: 'createList',
+    component: createList,
     meta: {
       layout: 'default',
       requiresToken: true

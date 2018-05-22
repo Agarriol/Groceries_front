@@ -1,16 +1,18 @@
 {
   "es": {
     "applicationTitle": "Groceries",
-    "loginOut": "Cerrar sesión",
     "changeCorrect": "Los cambios se han guardado correctamente",
-    "name": "Nombre ",
+    "description": "Descripción ",
     "email": "Email ",
     "login": "Login ",
+    "loginOut": "Cerrar sesión",
+    "name": "Nombre ",
     "password": "Contraseña ",
     "passwordConfirm": "Confirmar contraseña ",
     "passwordNew": "Nueva contraseña ",
     "register": "Registro ",
     "reviseErrors": "Debe corregir los siguientes errores:",
-    "send": "Enviar"
+    "send": "Enviar",
+    "title": "Titulo "
   }
 }
