@@ -1,7 +1,10 @@
 {
   "es": {
     "list": {
-      "listUser": "Lista de usuarios"
+      "createList": "Nueva lista",
+      "list": "Listas de compra",
+      "showList": "Lista",
+      "filterTitle": "Filtrar por título "
     }
   }
 }

@@ -1,5 +1,41 @@
 div
-  h2 {{$t ("list.listUser")}}
+  h2 {{$t ("list.list")}}
 
 
   #example-component
+  form(@submit.prevent="addFilters" )
+      p
+        label {{$t ("list.filterTitle")}}
+        input(type="text" name="titleFilter" id="titleFilter" v-model="indexQueryParams.filters.title")
+      p
+        label Numero de página
+        input(type="text" name="pageNumber" id="pageNumber" v-model="pagination.current_page")
+      p
+        label Tamaño de página 
+        input(type="text" name="pageSize" id="pageSize" v-model="pagination.page_size")
+      p
+        input(type="submit" name="save_button" v-html="$t('send')")
+
+  table
+    tr
+      th {{$t ("title")}}
+      th {{$t ("description")}}
+      th 
+    tr(v-for="list in updateList")
+      td 
+        router-link(:to="{ name: 'showList', params: {id: list.id, titleList: list.title, descriptionList: list.description}}") {{list.title}}
+      td {{list.description}}
+      template(v-if ="list.user_id == userId")
+        td 
+          input(type="button" name= "delete" value="delete" @click="deleteList(list.id)")
+      template(v-else)
+        td 
+  input(v-if='pagination.current_page > 1' type="button" @click="previousPage()" value="Previous")
+  i {{pagination.current_page}} 
+  input(v-if='pagination.current_page < pagination.total_pages' type="button" @click="nextPage()" value="Next")
+
+  p
+    router-link(:to="{ name: 'createList'}") {{$t ("list.createList")}}
+        
+
+        

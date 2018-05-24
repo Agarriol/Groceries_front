@@ -30,7 +30,16 @@ Cypress.Commands.add('load_user', (method, user) => {
     method,
     url: 'users/*',
     response: `fixture:${user}`
-  });
+  }).as('getUser');
+});
+
+Cypress.Commands.add('load_lists', (method, list) => {
+  cy.server();
+  cy.route({
+    method,
+    url: 'lists*',
+    response: `fixture:${list}`
+  }).as('getLists');
 });
 
 Cypress.Commands.add('calls', (method, urlValue, responseValue) => {
