@@ -39,7 +39,7 @@ export default Vue.extend({
         // Hay algún error
         if (response.status === 422) {
           this.varErrorReset();
-
+          
           response.data.errors = Object.keys(response.data.errors);
 
           //this.errors.push(response.data.errors);

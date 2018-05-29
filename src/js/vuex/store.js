@@ -47,6 +47,6 @@ export default new Vuex.Store({
     },
     getLists: state => {
       return state.lists;
-    },
+    }
   }
 });

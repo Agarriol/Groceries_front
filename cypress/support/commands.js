@@ -42,6 +42,24 @@ Cypress.Commands.add('load_lists', (method, list) => {
   }).as('getLists');
 });
 
+Cypress.Commands.add('load_list', (method, list) => {
+  cy.server();
+  cy.route({
+    method,
+    url: 'lists/*',
+    response: `fixture:${list}`
+  }).as('getList');
+});
+
+Cypress.Commands.add('load_items', (method, items) => {
+  cy.server();
+  cy.route({
+    method,
+    url: 'lists/1/items*',
+    response: `fixture:${items}`
+  }).as('getItems');
+});
+
 Cypress.Commands.add('calls', (method, urlValue, responseValue) => {
   cy.server();
   cy.route({

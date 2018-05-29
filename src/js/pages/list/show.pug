@@ -1,3 +1,51 @@
 div
   h2 {{titleList}}
   p {{descriptionList}}
+
+  table
+    tr
+      th {{$t ("name")}}
+      th {{$t ("price")}}
+  
+    tr(v-for='item in items' :class="{editing: item == editItem}" v-cloak)
+      td(v-on:click="clickList(item)")
+        div(class='view') {{item.name}}
+        div(v-if ="item.user_id == userId || listUserId == userId" class='edit') 
+          input(type="text" name="editName" v-model="editName" v-bind:class="{ 'error': errorsVar.editNameError}")
+        div(v-else class='edit') {{item.name}}
+
+      td(v-on:click="clickList(item)")
+        div(class='view') {{item.price}}
+        div(v-if ="item.user_id == userId || listUserId == userId" class='edit') 
+          input(type="number" name="editPrice" v-model.number="editPrice" v-bind:class="{ 'error': errorsVar.editPriceError}")
+
+        div(v-else class='edit') {{item.price}}
+
+      template(v-if ="item.user_id == userId || listUserId == userId ")
+        td 
+          div(class='view') 
+            input(type="button" name= "delete_button" value="$t('delete')" @click="deleteItem(item.id)")
+          div(class='edit')
+            input(type="button" name= "edit_button" value="$t('edit')" @click="updateItem(item.id, editName, editPrice)")
+            br
+            input(type="button" name= "cancel_button" value="$t('cancel')" @click="updateItemCancel()")
+  
+    tr
+      br
+    tr
+      td
+        p(v-for="error in errors") 
+          template(v-if="error.startsWith('name')") 
+            i {{error}}
+        input(type="text" name="newName" id="newName" v-model="newName" placeholder="Nombre" v-bind:class="{ 'error': errorsVar.newNameError}")
+      td
+        p(v-for="error in errors") 
+          template(v-if="error.startsWith('price')") 
+            i {{error}}
+        input(type="text" name="newPrice" id="newPrice" v-model="newPrice" placeholder="Precio" v-bind:class="{ 'error': errorsVar.newPriceError}")
+      td
+        input(type="button" name="save_button" value="$t('add')" @click="addItem()")
+
+
+
+    

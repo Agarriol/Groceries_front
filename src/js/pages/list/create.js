@@ -38,8 +38,7 @@ export default Vue.extend({
           response.data.errors = Object.keys(response.body);
 
           for (let i = 0; i < response.data.errors.length; i++) {
-
-            this.errors.push(response.data.errors[i]);
+            this.errors.push(response.data.errors[i] + ': ' + response.data[response.data.errors[i]]);
 
             if (response.data.errors[i] === 'title') {
               this.errorsVar.titleHasError = true;

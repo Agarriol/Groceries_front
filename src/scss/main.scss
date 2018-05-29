@@ -3,3 +3,33 @@
 .error {
   border: 2px solid red;
 }
+
+table {
+  background-color: #fff;
+}
+
+th {
+  background-color: #426cb9;
+  color: #ffffffa8;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  padding: 10px 20px;
+}
+
+[v-cloak] {
+    display:none;
+  }
+  .edit {
+    display:none;
+  }
+  .editing .edit {
+    display: block;
+  }
+  .editing .view {
+    display:none;
+  }

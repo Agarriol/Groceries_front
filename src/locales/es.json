@@ -1,8 +1,11 @@
 {
   "es": {
+    "add": "Añadir",
     "applicationTitle": "Groceries",
     "changeCorrect": "Los cambios se han guardado correctamente",
+    "delete": "Eliminar ",
     "description": "Descripción ",
+    "edit": "Editar",
     "email": "Email ",
     "login": "Login ",
     "loginOut": "Cerrar sesión",
@@ -10,6 +13,7 @@
     "password": "Contraseña ",
     "passwordConfirm": "Confirmar contraseña ",
     "passwordNew": "Nueva contraseña ",
+    "price": "Precio",
     "register": "Registro ",
     "reviseErrors": "Debe corregir los siguientes errores:",
     "send": "Enviar",
