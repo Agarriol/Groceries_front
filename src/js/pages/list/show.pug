@@ -4,10 +4,20 @@ div
 
   table
     tr
-      th {{$t ("name")}}
+      th
+      th {{$t ("item")}}
       th {{$t ("price")}}
   
     tr(v-for='item in items' :class="{editing: item == editItem}" v-cloak)
+      td
+        template(v-if='item.votes[0]')
+          img(v-on:click="deleteVote(item.id, item.votes)" v-if="myVote(item.votes) == true" src=require('assets/images/star.png') width="20")
+          img(v-on:click="addVote(item.id)" v-else src=require('assets/images/emptyStar.png') width="20")
+          i {{item.votes.length}}
+        template(v-else)
+          img(v-on:click="addVote(item.id)" src=require('assets/images/emptyStar.png') width="20")
+          i {{item.votes.length}}
+          
       td(v-on:click="clickList(item)")
         div(class='view') {{item.name}}
         div(v-if ="item.user_id == userId || listUserId == userId" class='edit') 
@@ -33,6 +43,7 @@ div
     tr
       br
     tr
+      td
       td
         p(v-for="error in errors") 
           template(v-if="error.startsWith('name')") 

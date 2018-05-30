@@ -76,7 +76,7 @@ export default Vue.extend({
           response.data.errors = Object.keys(response.body);
 
           for (let i = 0; i < response.data.errors.length; i++) {
-            this.errors.push(response.data.errors[i] + ': ' + response.data[response.data.errors[i]]);
+            this.errors.push(`${response.data.errors[i]}: ${response.data[response.data.errors[i]]}`);
 
             if (response.data.errors[i] === 'name') {
               this.errorsVar.newNameError = true;
@@ -135,7 +135,65 @@ export default Vue.extend({
       this.editName = item.name;
       this.editPrice = item.price;
     },
+    myVote(itemVotes) {
+      for (var i in itemVotes) {
+        if (itemVotes[i].user_id == this.userId) {
+          return true;
+        }
+      }
 
+      /* Object.keys(itemVotes).forEach((key, index) => {
+        if (itemVotes[key].user_id === this.userId) {
+          return true;
+        }
+      }); */
+
+      return false;
+    },
+    addVote(itemActualId) {
+      API.vote.create(
+        {
+          list_id: this.listId,
+          item_id: itemActualId
+        },
+        '',
+        {headers: {Authorization: `Bearer ${this.userToken}`}}
+      ).then(response => {
+        // No ha habido errores
+        this.showListItems();
+      }, response => {
+        // Ha habido errores
+        if (response.status === 422) {
+          // TODO, que hacer aqui?
+        }
+      });
+    },
+    deleteVote(itemActualId, itemVotes) {
+      let actualVoteId = '';
+
+      for (var i in itemVotes) {
+        if (itemVotes[i].user_id == this.userId) {
+          actualVoteId =itemVotes[i].id
+        }
+      }
+
+      API.vote.delete(
+        {
+          list_id: this.listId,
+          item_id: itemActualId,
+          vote_id: actualVoteId
+        },
+        {headers: {Authorization: `Bearer ${this.userToken}`}}
+      ).then(response => {
+        // No ha habido errores
+        this.showListItems();
+      }, response => {
+        // Ha habido errores
+        if (response.status === 422) {
+          // TODO, que hacer aqui?
+        }
+      });
+    }
   },
   computed: {
   },

@@ -17,12 +17,12 @@ describe('showList', () => {
     it('correct data', () => {
       cy.get('h2').eq(0).should('contain', 'Titulo lista ');
       cy.get('p').eq(1).should('contain', 'descripción lista');
-      cy.get('th').eq(0).should('contain', 'Nombre');
-      cy.get('th').eq(1).should('contain', 'Precio');
-      cy.get('td').eq(0).should('contain', 'Tele');
-      cy.get('td').eq(1).should('contain', '150');
-      cy.get('td').eq(2).should('contain', 'gtx 1080');
-      cy.get('td').eq(3).should('contain', '600');
+      cy.get('th').eq(1).should('contain', 'Item');
+      cy.get('th').eq(2).should('contain', 'Precio');
+      cy.get('td').eq(1).should('contain', 'Tele');
+      cy.get('td').eq(2).should('contain', '150');
+      cy.get('td').eq(4).should('contain', 'gtx 1080');
+      cy.get('td').eq(5).should('contain', '600');
     });
   });
 
@@ -39,7 +39,8 @@ describe('showList', () => {
       });
 
       it('really add item', () => {
-        cy.get('td').eq(8).should('contain', 'pantalon');
+        cy.get('tr').eq(4).children('td').eq(1)
+          .should('contain', 'pantalon');
       });
     });
   });
@@ -47,7 +48,8 @@ describe('showList', () => {
   describe('edit data', () => {
     describe('user with permission', () => {
       beforeEach(() => {
-        cy.get('td').eq(3).click();
+        cy.get('tr').eq(2).children('td').eq(2)
+          .click();
 
         cy.get('input[name="editName"]').eq(0).type('pantalones');
         // cy.get('input[name="editPrice"]').type('20');
@@ -63,7 +65,8 @@ describe('showList', () => {
       });
 
       it('really add item', () => {
-        cy.get('td').eq(2).should('contain', 'pantalones');
+        cy.get('tr').eq(2).children('td').eq(1)
+          .should('contain', 'pantalones');
       });
     });
   });
@@ -82,13 +85,66 @@ describe('showList', () => {
         response: 'fixture:items4.json'
       }).as('deleteItem');
 
-      cy.get('tr').eq(2).children('td').eq(2)
+      cy.get('tr').eq(2).children('td').eq(3)
         .click();
       cy.wait(['@deleteItem']);
     });
 
     it('check table', () => {
-      cy.get('td').eq(2).should('contain', 'gtx 1080ti');
+      cy.get('tr').eq(2).children('td').eq(1)
+        .should('contain', 'gtx 1080ti');
+    });
+  });
+
+  describe('check votes', () => {
+    describe('check correct icon', () => {
+      it('empty star if user dont vote', () => {
+        cy.get('tr').eq(2).children('td').eq(0)
+          .children('img')
+          .should('have.attr', 'src')
+          .should('include', 'assets/4c1e1c1f9c65da32586325a5072cb501.png');
+      });
+      it('filled star if user vote', () => {
+        cy.get('tr').eq(3).children('td').eq(0)
+          .children('img')
+          .should('have.attr', 'src')
+          .should('include', 'assets/98b190b78518f0f397b1df8d360aae1a.png');
+      });
+    });
+
+    describe('if filled star call delete vote', () => {
+      beforeEach(() => {
+        cy.route({
+          method: 'DELETE',
+          url: 'lists/1/items/28/votes/3',
+          response: 'fixture:items.json'
+        }).as('deleteItems');
+
+        cy.get('tr').eq(2).children('td').eq(0)
+          .click();
+      });
+
+
+      it('correct call', () => {
+        cy.wait(['@deleteItems']);
+      });
+    });
+
+    describe('if empty star call create vote', () => {
+      beforeEach(() => {
+        cy.route({
+          method: 'POST',
+          url: 'lists/1/items/29/votes',
+          response: 'fixture:items.json'
+        }).as('createItems');
+
+        cy.get('tr').eq(3).children('td').eq(0)
+          .click();
+      });
+
+      it('correct call', () => {
+        cy.wait(['@createItems']);
+      });
     });
   });
 });
