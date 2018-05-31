@@ -1,4 +1,3 @@
-import {mapActions} from 'vuex';
 import template from './index.pug';
 
 export default Vue.extend({
@@ -47,15 +46,15 @@ export default Vue.extend({
       this.addData();
       API.user.update(this.userId, this.updateData, {
         headers: {
-          Authorization: 'Bearer '+ this.userToken
+          Authorization: `Bearer ${this.userToken}`
         }
-      }).then(response => {
+      }).then(() => {
         this.changeData = true;
         this.$store.dispatch('saveUser', {
           email: this.email,
           name: this.name
         });
-      }, response => { 
+      }, response => {
         if (response.status === 422) {
           this.varErrorReset();
 

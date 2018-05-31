@@ -32,17 +32,17 @@ export default Vue.extend({
           password: this.password,
           password_confirmation: this.passwordConfirm
         }
-      }).then(response => {
+      }).then(() => {
         // se ha añadido el usuario correctamente =)
         this.registration = true;
       }, response => {
         // Hay algún error
         if (response.status === 422) {
           this.varErrorReset();
-          
+
           response.data.errors = Object.keys(response.data.errors);
 
-          //this.errors.push(response.data.errors);
+          // this.errors.push(response.data.errors);
           for (let i = 0; i < response.data.errors.length; i++) {
             this.errors.push(response.data.errors[i]);
             // TODO, esto se tiene que poder hacer con un bucle

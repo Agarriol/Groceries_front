@@ -1,6 +1,6 @@
 // import ExampleComponent from 'js/components/example/index.js';
-import {mapActions} from 'vuex';
-import {mapGetters} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
+// import {mapGetters} from 'vuex';
 import template from './index.pug';
 
 export default Vue.extend({

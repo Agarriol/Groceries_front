@@ -30,8 +30,17 @@ export default Vue.extend({
   },
   methods: {
     deleteItem(itemId) {
-      API.item.destroy(this.listId, itemId, {headers: {Authorization: `Bearer ${this.userToken}`}}).then(response => {
+      API.item.destroy(
+        this.listId,
+        itemId,
+        {headers: {Authorization: `Bearer ${this.userToken}`}}
+      ).then(() => {
         this.showListItems();
+      }, response => {
+        // Ha habido errores
+        if (response.status === 422) {
+          // TODO, que hacer aqui?
+        }
       });
     },
     showList() {
@@ -62,7 +71,7 @@ export default Vue.extend({
           }
         },
         {headers: {Authorization: `Bearer ${this.userToken}`}}
-      ).then(response => {
+      ).then(() => {
         // No ha habido errores
         this.varErrorReset();
         this.showListItems();
@@ -98,7 +107,7 @@ export default Vue.extend({
           }
         },
         {headers: {Authorization: `Bearer ${this.userToken}`}}
-      ).then(response => {
+      ).then(() => {
         // No ha habido errores
         this.varErrorReset();
         this.editItem = false;
@@ -136,19 +145,19 @@ export default Vue.extend({
       this.editPrice = item.price;
     },
     myVote(itemVotes) {
-      for (var i in itemVotes) {
-        if (itemVotes[i].user_id == this.userId) {
+      /* for (let i = 0; i < itemVotes.length; i++) {
+        if (itemVotes[i].user_id === this.userId) {
+          console.log('dentro');
           return true;
         }
+      } */
+      const vote = itemVotes.find(element => (element.user_id === this.userId));
+
+      if (typeof vote === 'undefined') {
+        return false;
       }
 
-      /* Object.keys(itemVotes).forEach((key, index) => {
-        if (itemVotes[key].user_id === this.userId) {
-          return true;
-        }
-      }); */
-
-      return false;
+      return true;
     },
     addVote(itemActualId) {
       API.vote.create(
@@ -158,7 +167,7 @@ export default Vue.extend({
         },
         '',
         {headers: {Authorization: `Bearer ${this.userToken}`}}
-      ).then(response => {
+      ).then(() => {
         // No ha habido errores
         this.showListItems();
       }, response => {
@@ -171,9 +180,9 @@ export default Vue.extend({
     deleteVote(itemActualId, itemVotes) {
       let actualVoteId = '';
 
-      for (var i in itemVotes) {
-        if (itemVotes[i].user_id == this.userId) {
-          actualVoteId =itemVotes[i].id
+      for (let i = 0; i < itemVotes.length; i++) {
+        if (itemVotes[i].user_id === this.userId) {
+          actualVoteId = itemVotes[i].id;
         }
       }
 
@@ -184,7 +193,7 @@ export default Vue.extend({
           vote_id: actualVoteId
         },
         {headers: {Authorization: `Bearer ${this.userToken}`}}
-      ).then(response => {
+      ).then(() => {
         // No ha habido errores
         this.showListItems();
       }, response => {

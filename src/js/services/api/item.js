@@ -36,9 +36,9 @@ export default {
     return Vue.http.delete(
       `http://localhost:3000/lists/${listId}/items/${itemId}`,
       params
-    ).then(response => {
-      return response.data;
+    ).catch(() => {
+      return Promise.reject(response);
     });
-  },
+  }
 
 };
