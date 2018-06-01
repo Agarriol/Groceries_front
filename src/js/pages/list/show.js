@@ -1,19 +1,18 @@
-
+import paginationComponent from 'js/components/pagination/index.js';
 import template from './show.pug';
 
 export default Vue.extend({
   template: template(),
   components: {
+    paginationComponent
   },
   data() {
     return {
       userId: this.$store.state.users.userId,
       userToken: this.$store.state.users.userToken,
       listId: this.$route.params.id,
-      titleList: '', // this.$route.params.titleList,
-      descriptionList: '', // this.$route.params.descriptionList
+      list: '',
       items: '',
-      listUserId: '',
       newName: '',
       newPrice: '',
       errors: [],
@@ -25,7 +24,13 @@ export default Vue.extend({
       },
       editItem: false,
       editName: '',
-      editPrice: ''
+      editPrice: '',
+      pagination: {
+        current_page: '',
+        total_pages: '',
+        page_size: '10',
+        total_elements: ''
+      }
     };
   },
   methods: {
@@ -46,20 +51,35 @@ export default Vue.extend({
     showList() {
       API.list.show(
         this.listId,
-        {headers: {Authorization: `Bearer ${this.userToken}`}, params: this.indexParams}
-      ).then(response => {
-        this.titleList = response.title;
-        this.descriptionList = response.description;
-        this.listUserId = response.user_id;
+        {
+          headers: {Authorization: `Bearer ${this.userToken}`}
+        }
+      ).then(response => { 
+        this.list = response;
       });
     },
     showListItems() {
       API.item.index(
         this.listId,
-        {headers: {Authorization: `Bearer ${this.userToken}`}}
+        {
+          headers: {Authorization: `Bearer ${this.userToken}`},
+          params: {
+            page: {
+              number: this.pagination.current_page,
+              size: this.pagination.page_size
+            }
+          }
+        }
       ).then(response => {
+        this.updatePagination(response.meta);
         this.items = response.data;
       });
+    },
+    updatePagination(pagination) {
+      this.pagination.current_page = pagination.current_page;
+      this.pagination.total_pages = pagination.total_pages;
+      // this.pagination.page_size = pagination.page_size;
+      this.pagination.total_elements = pagination.total_elements;
     },
     addItem() {
       API.item.create(

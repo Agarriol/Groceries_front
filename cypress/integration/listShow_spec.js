@@ -16,7 +16,7 @@ describe('showList', () => {
   describe('assert that data is loaded', () => {
     it('correct data', () => {
       cy.get('h2').eq(0).should('contain', 'Titulo lista ');
-      cy.get('p').eq(1).should('contain', 'descripción lista');
+      cy.get('p').eq(0).should('contain', 'descripción lista');
       cy.get('th').eq(1).should('contain', 'Item');
       cy.get('th').eq(2).should('contain', 'Precio');
       cy.get('td').eq(1).should('contain', 'Tele');
@@ -33,9 +33,10 @@ describe('showList', () => {
         cy.get('input[name="newPrice"]').type('20');
 
         cy.load_items('POST', 'item.json');
+        // TODO, a veces devuelve items
         cy.load_items('GET', 'items3.json');
 
-        cy.get('input[name="save_button"]').click();
+        cy.get('button[name="save_button"]').click();
       });
 
       it('really add item', () => {
@@ -61,7 +62,7 @@ describe('showList', () => {
         }).as('getItems');
         cy.load_items('GET', 'items2.json');
 
-        cy.get('input[name="edit_button"]').eq(0).click();
+        cy.get('button[name="edit_button"]').eq(0).click();
       });
 
       it('really add item', () => {

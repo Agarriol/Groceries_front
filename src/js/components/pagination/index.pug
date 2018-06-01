@@ -1,0 +1,12 @@
+div
+  a(v-if='pagination.current_page > 1' @click="previousPage()" value="Previous") &laquo; 
+  i {{pagination.current_page}}
+  a(v-if='pagination.current_page < pagination.total_pages' @click="nextPage()" value="Next") &raquo;
+
+  slot(name="maxSize")  Tamaño de página 
+      select(v-on:input="sizePage($event.target.value)")
+        option(value="5") 5
+        option(value="10" selected=true) 10
+        option(value="15") 15
+        option(value="20") 20
+

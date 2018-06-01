@@ -1,12 +1,11 @@
-// import ExampleComponent from 'js/components/example/index.js';
 import {mapActions, mapGetters} from 'vuex';
-// import {mapGetters} from 'vuex';
+import paginationComponent from 'js/components/pagination/index.js';
 import template from './index.pug';
 
 export default Vue.extend({
   template: template(),
   components: {
-    // ExampleComponent
+    paginationComponent
   },
   data() {
     return {
@@ -52,13 +51,18 @@ export default Vue.extend({
       // this.pagination.page_size = pagination.page_size;
       this.pagination.total_elements = pagination.total_elements;
     },
-    nextPage() {
-      this.pagination.current_page = this.pagination.current_page + 1;
-      this.indexList();
-    },
-    previousPage() {
-      this.pagination.current_page = this.pagination.current_page - 1;
-      this.indexList();
+    updateListState(listData) {
+      API.list.update(
+        listData.id,
+        {
+          list: {
+            state: !listData.state
+          }
+        },
+        {headers: {Authorization: `Bearer ${this.userToken}`}}
+      ).then(() => {
+        this.indexList();
+      });
     }
   },
   computed: {

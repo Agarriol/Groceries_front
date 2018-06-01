@@ -1,6 +1,9 @@
 div
-  h1 {{$t ("applicationTitle")}}
-
-  p {{users.userName}}
-    <button v-on:click="loginOut()">{{$t ("loginOut")}}</button> 
+  div.header
+    a.logo {{$t ("applicationTitle")}}
+    div.header-right
+      router-link(:to="{ name: 'list'}") {{$t ("lists")}}
+      router-link(:to="{ name: 'profile'}") {{users.userName}}
+      a(v-on:click="loginOut()") {{$t ("loginOut")}}
+  
   router-view

@@ -5,25 +5,26 @@ div
 
     p(v-if='changeData == true') {{$t ("changeCorrect")}}
     
+
     form(@submit.prevent="addUser" v-if='changeData == false')
       p(v-if="errors.length")
         b {{$t ("reviseErrors")}}
         ul
           li(v-for="error in errors") {{error}}
       p
-        label(for="name") {{$t ("name")}}  
-        input(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.nameHasError}")
+        label.form(for="name") {{$t ("name")}}  
+        input.form(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.nameHasError}")
       p
-        label(for="email") {{$t ("email")}}  
-        input(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.emailHasError}")
+        label.form(for="email") {{$t ("email")}}  
+        input.form(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.emailHasError}")
       p
-        label(for="passwordCurrent") {{$t ("password")}}  
-        input(type="text" name="passwordCurrent" id="passwordCurrent" v-model="passwordCurrent" v-bind:class="{ 'error': errorsVar.passwordCurrentHasError}")
+        label.form(for="passwordCurrent") {{$t ("password")}}  
+        input.form(type="text" name="passwordCurrent" id="passwordCurrent" v-model="passwordCurrent" v-bind:class="{ 'error': errorsVar.passwordCurrentHasError}")
       p
-        label(for="passwordNew") {{$t ("passwordNew")}}  
-        input(type="text" name="passwordNew" id="passwordNew" v-model="passwordNew" v-bind:class="{ 'error': errorsVar.passwordNewHasError}")
+        label.form(for="passwordNew") {{$t ("passwordNew")}}  
+        input.form(type="text" name="passwordNew" id="passwordNew" v-model="passwordNew" v-bind:class="{ 'error': errorsVar.passwordNewHasError}")
       p
-        label(for="passwordNewConfirm") {{$t ("passwordConfirm")}}  
-        input(type="text" name="passwordNewConfirm" id="passwordNewConfirm" v-model="passwordNewConfirm" v-bind:class="{ 'error': errorsVar.passwordNewConfirmHasError}")
+        label.form(for="passwordNewConfirm") {{$t ("passwordConfirm")}}  
+        input.form(type="text" name="passwordNewConfirm" id="passwordNewConfirm" v-model="passwordNewConfirm" v-bind:class="{ 'error': errorsVar.passwordNewConfirmHasError}")
       p
-        input(type="submit" name="save_button" v-html="$t('send')")
+        input.form(type="submit" name="save_button" v-html="$t('send')")

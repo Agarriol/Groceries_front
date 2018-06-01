@@ -13,7 +13,8 @@ describe('List', () => {
     it('check table', () => {
       cy.get('th').eq(1).should('contain', 'Descripción');
       cy.get('td').eq(0).should('contain', 'Lista 1');
-      cy.get('td').eq(2).children('input').should('have.attr', 'name', 'delete');
+      cy.get('td').eq(2).children('img').eq(1)
+        .should('have.attr', 'name', 'delete');
       cy.get('td').eq(5).should('contain', '');
     });
   });
@@ -30,7 +31,8 @@ describe('List', () => {
         url: 'lists*',
         response: 'fixture:lists2.json'
       }).as('deleteList');
-      cy.get('td').eq(2).children('input').click();
+      cy.get('td').eq(2).children('img').eq(1)
+        .click();
       cy.wait(['@deleteList']);
     });
     it('check table', () => {

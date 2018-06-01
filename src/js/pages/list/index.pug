@@ -7,13 +7,6 @@ div
       p
         label {{$t ("list.filterTitle")}}
         input(type="text" name="titleFilter" id="titleFilter" v-model="indexQueryParams.filters.title")
-      p
-        label Numero de página
-        input(type="text" name="pageNumber" id="pageNumber" v-model="pagination.current_page")
-      p
-        label Tamaño de página 
-        input(type="text" name="pageSize" id="pageSize" v-model="pagination.page_size")
-      p
         input(type="submit" name="save_button" v-html="$t('send')")
 
   table
@@ -23,16 +16,20 @@ div
       th 
     tr(v-for="list in updateList")
       td 
+        img(v-if="list.state == true" src=require('assets/images/edit.png') width="15") 
+        img(v-if="list.state == false" src=require('assets/images/noEdit.png') width="15")
         router-link(:to="{ name: 'showList', params: {id: list.id, titleList: list.title, descriptionList: list.description}}") {{list.title}}
       td {{list.description}}
       template(v-if ="list.user_id == userId")
-        td 
-          input(type="button" name= "delete" value="delete" @click="deleteList(list.id)")
+        td
+          img(v-if="list.state" @click="updateListState(list)" src=require('assets/images/lock.png') width="20")
+          img(v-if="!list.state" @click="updateListState(list)" src=require('assets/images/unlocked.png') width="20")
+          img(name="delete" v-on:click="deleteList(list.id)" src=require('assets/images/delete.png') width="20")
+          
       template(v-else)
         td 
-  input(v-if='pagination.current_page > 1' type="button" @click="previousPage()" value="Previous")
-  i {{pagination.current_page}} 
-  input(v-if='pagination.current_page < pagination.total_pages' type="button" @click="nextPage()" value="Next")
+
+  pagination-component(@dataTable="indexList()" v-bind:pagination="pagination")
 
   p
     router-link(:to="{ name: 'createList'}") {{$t ("list.createList")}}

@@ -9,6 +9,7 @@ import store from 'js/vuex/store.js';
 import i18n from 'js/i18n.js';
 
 require('scss/main.scss');
+require('scss/form.scss');
 
 /* --- Vue-Resource --- */
 Vue.router = router;

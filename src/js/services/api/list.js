@@ -21,6 +21,14 @@ export default {
     });
   },
 
+  update(listId, data, params) {
+    return Vue.http.put(`http://localhost:3000/lists/${listId}`, data, params).then(response => {
+      return response.data;
+    }, response => {
+      return Promise.reject(response);
+    });
+  },
+
   destroy(id, params) {
     return Vue.http.delete(`http://localhost:3000/lists/${id}`, params).catch(() => {
       return Promise.reject(response);

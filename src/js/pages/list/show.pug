@@ -1,6 +1,6 @@
 div
-  h2 {{titleList}}
-  p {{descriptionList}}
+  h2 {{list.title}}
+  p {{list.description}}
 
   table
     tr
@@ -20,29 +20,28 @@ div
           
       td(v-on:click="clickList(item)")
         div(class='view') {{item.name}}
-        div(v-if ="item.user_id == userId || listUserId == userId" class='edit') 
+        div(v-if ="(item.user_id == userId || list.listUserId == userId) && list.state == true" class='edit') 
           input(type="text" name="editName" v-model="editName" v-bind:class="{ 'error': errorsVar.editNameError}")
         div(v-else class='edit') {{item.name}}
 
       td(v-on:click="clickList(item)")
         div(class='view') {{item.price}}
-        div(v-if ="item.user_id == userId || listUserId == userId" class='edit') 
+        div(v-if ="(item.user_id == userId || list.listUserId == userId) && list.state == true" class='edit') 
           input(type="number" name="editPrice" v-model.number="editPrice" v-bind:class="{ 'error': errorsVar.editPriceError}")
 
         div(v-else class='edit') {{item.price}}
 
-      template(v-if ="item.user_id == userId || listUserId == userId ")
-        td 
+      template(v-if ="(item.user_id == userId || list.listUserId == userId) && list.state == true")
+        td
           div(class='view') 
-            input(type="button" name= "delete_button" value="$t('delete')" @click="deleteItem(item.id)")
+            button(name= "delete_button" @click="deleteItem(item.id)") {{$t('delete')}}
           div(class='edit')
-            input(type="button" name= "edit_button" value="$t('edit')" @click="updateItem(item.id, editName, editPrice)")
+            button(name= "edit_button" @click="updateItem(item.id, editName, editPrice)") {{$t('edit')}}
             br
-            input(type="button" name= "cancel_button" value="$t('cancel')" @click="updateItemCancel()")
-  
+            button(name= "cancel_button" @click="updateItemCancel()") {{$t('cancel')}}
     tr
       br
-    tr
+    tr(v-if="list.state == true")
       td
       td
         p(v-for="error in errors") 
@@ -55,8 +54,7 @@ div
             i {{error}}
         input(type="text" name="newPrice" id="newPrice" v-model="newPrice" placeholder="Precio" v-bind:class="{ 'error': errorsVar.newPriceError}")
       td
-        input(type="button" name="save_button" value="$t('add')" @click="addItem()")
+        #input(type="button" name="save_button" value="$t('add')" @click="addItem()")
+        button(name="save_button" value="$t('add')" @click="addItem()") {{$t('add')}}
 
-
-
-    
+  pagination-component(@dataTable="showListItems()" v-bind:pagination="pagination")

@@ -1,6 +1,7 @@
-#register
-  h1 {{$t ("applicationTitle")}}
-
-  <router-link to="/login"> {{$t ("login")}}</router-link>
+div
+  div.header
+    a.logo {{$t ("applicationTitle")}}
+    div.header-right
+      router-link(:to="{name: 'login'}") {{$t ("login")}}
   
   router-view

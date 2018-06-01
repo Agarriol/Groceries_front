@@ -1,6 +1,12 @@
-#layout_login
-  h1 {{$t ("applicationTitle")}}
 
-  <router-link to="/home"> {{$t ("register")}}</router-link>
-  
+div
+  div.header
+    a.logo {{$t ("applicationTitle")}}
+    div.header-right
+      router-link(:to="{name: 'home'}") {{$t ("register")}}
+    
   router-view
+
+
+
+
