@@ -1,12 +1,10 @@
 
 div
   div.header
-    a.logo {{$t ("applicationTitle")}}
-    div.header-right
-      router-link(:to="{name: 'home'}") {{$t ("register")}}
-    
+    a.logo {{$t ("applicationStartTitle")}}
+    a.endlogo {{$t ("applicationEndTitle")}}
+  div.menu
+    div.menu-right
+      router-link(v-if="route.name == 'login'" :to="{name: 'register'}") {{$t ("register")}}
+      router-link(v-if="route.name == 'register'" :to="{name: 'login'}") {{$t ("login")}}
   router-view
-
-
-
-

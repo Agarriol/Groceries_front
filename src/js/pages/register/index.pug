@@ -10,16 +10,16 @@ div
           li(v-for="error in errors") {{error}}
       p
         label(for="name") {{$t ("name")}} 
-        input(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.nameHasError}")
+        input(type="text" name="name" id="name" v-model="name" v-bind:class="{ 'error': errorsVar.name}")
       p
         label(for="email") {{$t ("email")}} 
-        input(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.emailHasError}")
+        input(type="text" name="email" id="email" v-model="email" v-bind:class="{ 'error': errorsVar.email}")
       p
         label(for="password") {{$t ("password")}} 
-        input(type="text" name="password" id="password" v-model="password" v-bind:class="{ 'error': errorsVar.passwordHasError}")
+        input(type="password" name="password" id="password" v-model="password" v-bind:class="{ 'error': errorsVar.password}")
       p
-        label(for="passwordConfirm") {{$t ("passwordConfirm")}}
-        input(type="text" name="passwordConfirm" id="passwordConfirm" v-model="passwordConfirm" v-bind:class="{ 'error': errorsVar.passwordConfirmHasError}")
+        label(for="password_confirmation") {{$t ("passwordConfirm")}}
+        input(type="password" name="password_confirmation" id="password_confirmation" v-model="password_confirmation" v-bind:class="{ 'error': errorsVar.password_confirmation}")
       p
         input(type="submit" name="save_button" v-html="$t('send')")
 

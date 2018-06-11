@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 
 // Pages
-import Home from './pages/home/index.js';
+import Register from './pages/register/index.js';
 import Login from './pages/login/index.js';
 import List from './pages/list/index.js';
 import createList from './pages/list/create.js';
@@ -21,10 +21,10 @@ const RouteParent = {render(c) { return c('router-view'); }};
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home,
+    name: 'register',
+    component: Register,
     meta: {
-      layout: 'register',
+      layout: 'login',
       requiresToken: false
     }
   },
@@ -86,20 +86,16 @@ const router = new VueRouter({routes});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresToken)) {
-    if (localStorage.getItem('token')) {
-      API.user.show(JSON.parse(atob(localStorage.getItem('token').split('.')[1])).userId, {
-        headers: {
-          Authorization: 'Bearer '+ localStorage.getItem('token')
-        }
-      }).then(response => {
+    if (localStorage.getItem('groceries_token')) {
+      API.user.show(JSON.parse(atob(localStorage.getItem('groceries_token').split('.')[1])).userId).then(response => {
         Vue.store.dispatch('saveUser', {
           email: response.email,
           name: response.name,
           id: response.id,
-          token: localStorage.getItem('token')
+          token: localStorage.getItem('groceries_token')
         });
         next();
-      }, response => {
+      }, () => {
         next();
       });
     } else {

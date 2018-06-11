@@ -1,7 +1,8 @@
 {
   "es": {
     "add": "Añadir",
-    "applicationTitle": "Groceries",
+    "applicationStartTitle": "Groce",
+    "applicationEndTitle": "ries",
     "cancel": "Cancelar",
     "changeCorrect": "Los cambios se han guardado correctamente",
     "delete": "Eliminar ",
@@ -20,6 +21,13 @@
     "register": "Registro ",
     "reviseErrors": "Debe corregir los siguientes errores:",
     "send": "Enviar",
-    "title": "Titulo "
+    "title": "Titulo ",
+    "errors": {
+      "blank": "Campo obligatorio",
+      "invalid": "Formato incorrecto",
+      "taken": "Ya existe este mail",
+      "too_long": "Demasiado largo",
+      "confirmation": "Las contraseñas no son iguales"
+    }
   }
 }

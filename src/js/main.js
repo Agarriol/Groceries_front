@@ -2,11 +2,13 @@ import VueResource from 'vue-resource';
 
 import DefaultLayout from 'js/layouts/default';
 import LoginLayout from 'js/layouts/login';
-import RegisterLayout from 'js/layouts/register';
+
+import ErrorsMixin from 'js/mixins/errors.js';
 
 import router from 'js/router.js';
 import store from 'js/vuex/store.js';
 import i18n from 'js/i18n.js';
+import 'js/vue-resource-config';
 
 require('scss/main.scss');
 require('scss/form.scss');
@@ -29,7 +31,7 @@ new Vue({
   i18n,
   components: {
     DefaultLayout,
-    LoginLayout,
-    RegisterLayout
-  }
+    LoginLayout
+  },
+  mixins: [ErrorsMixin]
 }).$mount('#app');

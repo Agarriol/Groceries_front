@@ -1,9 +1,15 @@
 div
   div.header
-    a.logo {{$t ("applicationTitle")}}
-    div.header-right
+    a.logo {{$t ("applicationStartTitle")}}
+    a.endlogo {{$t ("applicationEndTitle")}}
+  div.menu
+    div.menu-left
       router-link(:to="{ name: 'list'}") {{$t ("lists")}}
-      router-link(:to="{ name: 'profile'}") {{users.userName}}
-      a(v-on:click="loginOut()") {{$t ("loginOut")}}
+    div.menu-right
+      div.dropdown
+        button.dropbtn {{users.userName}}
+        div.dropdown-content
+          router-link(:to="{ name: 'profile'}") {{$t ("profile.profile")}}
+          a(v-on:click="loginOut()") {{$t ("loginOut")}}
   
   router-view

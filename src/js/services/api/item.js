@@ -1,7 +1,7 @@
 export default {
   index(listId, params) {
     return Vue.http.get(
-      `http://localhost:3000/lists/${listId}/items`,
+      `lists/${listId}/items`,
       params
     ).then(response => {
       return response.data;
@@ -10,7 +10,7 @@ export default {
 
   create(listId, data, params) {
     return Vue.http.post(
-      `http://localhost:3000/lists/${listId}/items`,
+      `lists/${listId}/items`,
       data,
       params
     ).then(response => {
@@ -22,7 +22,7 @@ export default {
 
   update(listId, itemId, data, params) {
     return Vue.http.put(
-      `http://localhost:3000/lists/${listId}/items/${itemId}`,
+      `lists/${listId}/items/${itemId}`,
       data,
       params
     ).then(response => {
@@ -34,7 +34,7 @@ export default {
 
   destroy(listId, itemId, params) {
     return Vue.http.delete(
-      `http://localhost:3000/lists/${listId}/items/${itemId}`,
+      `lists/${listId}/items/${itemId}`,
       params
     ).catch(() => {
       return Promise.reject(response);

@@ -4,7 +4,8 @@
       "createList": "Nueva lista",
       "list": "Listas de compra",
       "showList": "Lista",
-      "filterTitle": "Filtrar por título "
+      "filterTitle": "Filtrar por título ",
+      "filterDescription": "Filtrar por descripción "
     }
   }
 }

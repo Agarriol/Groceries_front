@@ -1,4 +1,4 @@
-import {mapActions, mapGetters} from 'vuex';
+// import {mapActions, mapGetters} from 'vuex';
 import paginationComponent from 'js/components/pagination/index.js';
 import template from './index.pug';
 
@@ -9,13 +9,14 @@ export default Vue.extend({
   },
   data() {
     return {
-      // lists: [], // Si se quiere que se modifique durante la ejecución... computed!
+      lists: [], // Si se quiere que se modifique durante la ejecución... computed!
       userId: this.$store.state.users.userId,
       userToken: this.$store.state.users.userToken,
       indexQueryParams: {
         sort: '-created_at',
         filters: {
-          title: ''
+          title: '',
+          description: ''
         }
       },
       pagination: {
@@ -27,28 +28,32 @@ export default Vue.extend({
     };
   },
   methods: {
+    /* ...mapActions([
+      'saveList'
+      // Usando ...mapActions se puede cambiar:
+      // this.$store.dispatch('saveList', { lists: response.data });
+      // this.saveList({ lists: response.data });
+    ]), */
     deleteList(id) {
-      API.list.destroy(id, {headers: {Authorization: `Bearer ${this.userToken}`}}).then(response => {
+      API.list.destroy(id, {}).then(() => {
         this.indexList();
       });
     },
     indexList() {
       API.list.index(
-        {headers: {Authorization: `Bearer ${this.userToken}`}, params: this.indexParams}
+        // La cabecera se añade con un interceptor (vue-resource-interceptor)
+        // {headers: {Authorization: `Bearer ${this.userToken}`}, params: this.indexParams}
+
+        {params: this.indexParams}
       ).then(response => {
         this.updatePagination(response.meta);
-        this.$store.dispatch('saveList', {
-          lists: response.data
-        });
+
+        this.lists = response.data;
       });
-    },
-    addFilters() {
-      this.indexList();
     },
     updatePagination(pagination) {
       this.pagination.current_page = pagination.current_page;
       this.pagination.total_pages = pagination.total_pages;
-      // this.pagination.page_size = pagination.page_size;
       this.pagination.total_elements = pagination.total_elements;
     },
     updateListState(listData) {
@@ -58,36 +63,40 @@ export default Vue.extend({
           list: {
             state: !listData.state
           }
-        },
-        {headers: {Authorization: `Bearer ${this.userToken}`}}
+        }
       ).then(() => {
-        this.indexList();
+        this.lists.forEach(list => {
+          if (list === listData) {
+            list.state = !list.state;
+          }
+        });
       });
     }
   },
   computed: {
-    ...mapActions([
-      'saveList' // mapea this.saveList() to this.$store.dispatch('saveList')
-    ]),
-    ...mapGetters([
+    /* ...mapGetters([
       'getLists'
-    ]),
-    updateList() {
-      return this.$store.getters.getLists;
-    },
+      // Usando ...mapGetters se puede cambiar:
+      // return this.$store.getters.getLists;
+      // return this.getLists;
+    ]), */
     indexParams() {
-      let applicatedFilters;
-      // TODO, función para filtros.
-      // let x;
-      // for(x in this.indexQueryParams.filters){
-      //   if (this.indexQueryParams.filters[x] !== '') {
-      //     prueba = {x: this.indexQueryParams.filters[x]};
-      //   }
-      // }
+      const applicatedFilters = {};
 
-      if (this.indexQueryParams.filters.title !== '') {
-        applicatedFilters = {title: this.indexQueryParams.filters.title};
-      }
+      // En vez del buche for, se hace con Object.
+      /* let x;
+      for (x in this.indexQueryParams.filters){
+        if (this.indexQueryParams.filters[x] !== '') {
+          applicatedFilters[x] = this.indexQueryParams.filters[x];
+          console.log ( applicatedFilters );
+        }
+      } */
+
+      Object.keys(this.indexQueryParams.filters).forEach(key => {
+        if (this.indexQueryParams.filters[key] !== '') {
+          applicatedFilters[key] = this.indexQueryParams.filters[key];
+        }
+      });
 
       return {
         page: {

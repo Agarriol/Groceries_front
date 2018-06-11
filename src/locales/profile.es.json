@@ -1,6 +1,7 @@
 {
   "es": {
     "profile": {
+      "profile": "Perfil",
       "userModify": "Modificar datos usuario",
       "userRegister": "Registrar usuario"
     }

@@ -1,12 +1,12 @@
 export default {
   index(params) {
-    return Vue.http.get('http://localhost:3000/lists', params).then(response => {
+    return Vue.http.get('lists', params).then(response => {
       return response.data;
     });
   },
 
   show(id, params) {
-    return Vue.http.get(`http://localhost:3000/lists/${id}`, params).then(response => {
+    return Vue.http.get(`lists/${id}`, params).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -14,7 +14,7 @@ export default {
   },
 
   create(data, params) {
-    return Vue.http.post('http://localhost:3000/lists', data, params).then(response => {
+    return Vue.http.post('lists', data, params).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -22,7 +22,7 @@ export default {
   },
 
   update(listId, data, params) {
-    return Vue.http.put(`http://localhost:3000/lists/${listId}`, data, params).then(response => {
+    return Vue.http.put(`lists/${listId}`, data, params).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -30,7 +30,7 @@ export default {
   },
 
   destroy(id, params) {
-    return Vue.http.delete(`http://localhost:3000/lists/${id}`, params).catch(() => {
+    return Vue.http.delete(`lists/${id}`, params).catch(() => {
       return Promise.reject(response);
     });
   }

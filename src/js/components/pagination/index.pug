@@ -1,12 +1,15 @@
 div
-  a(v-if='pagination.current_page > 1' @click="previousPage()" value="Previous") &laquo; 
-  i {{pagination.current_page}}
-  a(v-if='pagination.current_page < pagination.total_pages' @click="nextPage()" value="Next") &raquo;
+  a(v-bind:class="{'pagination-number':true}" )
+    a(v-if='pagination.current_page > 1' @click="previousPage()" value="Previous") &laquo; 
+    i(v-if='pagination.current_page > 1' @click="firstPage()" value="First")  1..
+    i(v-bind:class="{ 'pagination-selected': pagination.current_page}") {{pagination.current_page}}
+    i(v-if='pagination.current_page < pagination.total_pages' @click="lastPage()" value="Last") ..{{pagination.total_pages}} 
+    a(v-if='pagination.current_page < pagination.total_pages' @click="nextPage()" value="Next") &raquo;
 
-  slot(name="maxSize")  Tamaño de página 
-      select(v-on:input="sizePage($event.target.value)")
-        option(value="5") 5
-        option(value="10" selected=true) 10
-        option(value="15") 15
-        option(value="20") 20
-
+  a(v-bind:class="{'pagination-size':true}" )
+    slot(name="maxSize")  Tamaño de página 
+        select(v-on:input="sizePage($event.target.value)")
+          option(value="5") 5
+          option(value="10" selected=true) 10
+          option(value="15") 15
+          option(value="20") 20

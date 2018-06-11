@@ -1,12 +1,12 @@
 export default {
   index(params) {
-    return Vue.http.get('http://localhost:3000/users', params).then(response => {
+    return Vue.http.get('users', params).then(response => {
       return response.data;
     });
   },
 
   show(id, params) {
-    return Vue.http.get(`http://localhost:3000/users/${id}`, params).then(response => {
+    return Vue.http.get(`users/${id}`, params).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -16,7 +16,7 @@ export default {
   update(id, data, params) {
     const sendData = data; // instanceof FormData ? data : {data};
 
-    return Vue.http.put(`http://localhost:3000/users/${id}`, sendData, params).then(response => {
+    return Vue.http.put(`users/${id}`, sendData, params).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -26,7 +26,7 @@ export default {
   registration(data) {
     const sendData = data; // instanceof FormData ? session : {data};
 
-    return Vue.http.post('http://localhost:3000/registration', sendData).then(response => {
+    return Vue.http.post('registration', sendData).then(response => {
 
       return response.data;
     }, response => {
@@ -37,7 +37,7 @@ export default {
   session(data) {
     const sendData = data; // instanceof FormData ? session : {data};
 
-    return Vue.http.post('http://localhost:3000/session', sendData).then(response => {
+    return Vue.http.post('session', sendData).then(response => {
       return response.data;
     }, response => {
       return Promise.reject(response);
@@ -47,7 +47,7 @@ export default {
   deleteSession(data) {
     const sendData = data; // instanceof FormData ? data : {data};
 
-    return Vue.http.delete('http://localhost:3000/session', sendData).then(response => {
+    return Vue.http.delete('session', sendData).then(response => {
       return response;
     }, response => {
       return Promise.reject(response);

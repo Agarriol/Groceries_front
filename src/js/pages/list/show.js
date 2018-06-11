@@ -16,6 +16,7 @@ export default Vue.extend({
       newName: '',
       newPrice: '',
       errors: [],
+      updateErrors: [],
       errorsVar: {
         newNameError: false,
         newPriceError: false,
@@ -50,10 +51,7 @@ export default Vue.extend({
     },
     showList() {
       API.list.show(
-        this.listId,
-        {
-          headers: {Authorization: `Bearer ${this.userToken}`}
-        }
+        this.listId
       ).then(response => { 
         this.list = response;
       });
@@ -78,7 +76,6 @@ export default Vue.extend({
     updatePagination(pagination) {
       this.pagination.current_page = pagination.current_page;
       this.pagination.total_pages = pagination.total_pages;
-      // this.pagination.page_size = pagination.page_size;
       this.pagination.total_elements = pagination.total_elements;
     },
     addItem() {
@@ -102,14 +99,14 @@ export default Vue.extend({
         if (response.status === 422) {
           this.varErrorReset();
 
-          response.data.errors = Object.keys(response.body);
+          const indexErrors = Object.keys(response.body);
 
-          for (let i = 0; i < response.data.errors.length; i++) {
-            this.errors.push(`${response.data.errors[i]}: ${response.data[response.data.errors[i]]}`);
+          for (let i = 0; i < indexErrors.length; i++) {
+            this.errors.push(`${indexErrors[i]}: ` + Vue.i18n.t('errors.'+ response.data[indexErrors[i]][0].error));
 
-            if (response.data.errors[i] === 'name') {
+            if (indexErrors[i] === 'name') {
               this.errorsVar.newNameError = true;
-            } else if (response.data.errors[i] === 'price') {
+            } else if (indexErrors[i] === 'price') {
               this.errorsVar.newPriceError = true;
             }
           }
@@ -131,18 +128,24 @@ export default Vue.extend({
         // No ha habido errores
         this.varErrorReset();
         this.editItem = false;
-        this.showListItems();
+        this.items.forEach(item => {
+          if (item.id === updateItemId) {
+            item.name = updateName;
+            item.price = updatePrice;
+          }
+        });
       }, response => {
         // Ha habido errores
         if (response.status === 422) {
           this.varErrorReset();
-          response.data.errors = Object.keys(response.body);
+          const indexErrors = Object.keys(response.body);
 
-          for (let i = 0; i < response.data.errors.length; i++) {
+          for (let i = 0; i < indexErrors.length; i++) {
+            this.updateErrors.push(`${indexErrors[i]}: ` + Vue.i18n.t('errors.'+ response.data[indexErrors[i]][0].error));
 
-            if (response.data.errors[i] === 'name') {
+            if (indexErrors[i] === 'name') {
               this.errorsVar.editNameError = true;
-            } else if (response.data.errors[i] === 'price') {
+            } else if (indexErrors[i] === 'price') {
               this.errorsVar.editPriceError = true;
             }
           }
@@ -154,12 +157,14 @@ export default Vue.extend({
     },
     varErrorReset() {
       this.errors = [];
+      this.updateErrors = [];
       this.errorsVar.newNameError = false;
       this.errorsVar.newPriceError = false;
       this.errorsVar.editNameError = false;
       this.errorsVar.editPriceError = false;
     },
     clickList(item) {
+      this.varErrorReset();
       this.editItem = item;
       this.editName = item.name;
       this.editPrice = item.price;

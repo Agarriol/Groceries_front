@@ -7,6 +7,9 @@ export default Vue.extend({
     };
   },
   computed: {
+    route() {
+      return this.$route;
+    },
   },
   methods: {
   },

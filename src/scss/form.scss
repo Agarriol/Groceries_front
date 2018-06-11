@@ -1,4 +1,4 @@
-input[type=text].form, select.form, textarea.form {
+input[type=text].form, input[type=password].form, select.form, textarea.form {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -10,7 +10,6 @@ label.form {
   padding: 12px 12px 12px 0;
   display: inline-block;
 }
-
 
 input[type=submit].form {
   background-color: #426cb9;

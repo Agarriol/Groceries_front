@@ -21,12 +21,18 @@ div
       td(v-on:click="clickList(item)")
         div(class='view') {{item.name}}
         div(v-if ="(item.user_id == userId || list.listUserId == userId) && list.state == true" class='edit') 
+          p(v-for="error in updateErrors") 
+            template(v-if="error.startsWith('name')") 
+              i {{error}}
           input(type="text" name="editName" v-model="editName" v-bind:class="{ 'error': errorsVar.editNameError}")
         div(v-else class='edit') {{item.name}}
 
       td(v-on:click="clickList(item)")
         div(class='view') {{item.price}}
         div(v-if ="(item.user_id == userId || list.listUserId == userId) && list.state == true" class='edit') 
+          p(v-for="error in updateErrors") 
+            template(v-if="error.startsWith('price')") 
+              i {{error}}
           input(type="number" name="editPrice" v-model.number="editPrice" v-bind:class="{ 'error': errorsVar.editPriceError}")
 
         div(v-else class='edit') {{item.price}}
@@ -39,8 +45,7 @@ div
             button(name= "edit_button" @click="updateItem(item.id, editName, editPrice)") {{$t('edit')}}
             br
             button(name= "cancel_button" @click="updateItemCancel()") {{$t('cancel')}}
-    tr
-      br
+   
     tr(v-if="list.state == true")
       td
       td
@@ -52,7 +57,7 @@ div
         p(v-for="error in errors") 
           template(v-if="error.startsWith('price')") 
             i {{error}}
-        input(type="text" name="newPrice" id="newPrice" v-model="newPrice" placeholder="Precio" v-bind:class="{ 'error': errorsVar.newPriceError}")
+        input(type="number" name="newPrice" id="newPrice" v-model="newPrice" placeholder="Precio" v-bind:class="{ 'error': errorsVar.newPriceError}")
       td
         #input(type="button" name="save_button" value="$t('add')" @click="addItem()")
         button(name="save_button" value="$t('add')" @click="addItem()") {{$t('add')}}

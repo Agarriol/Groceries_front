@@ -8,9 +8,9 @@ div
         li(v-for="error in errors") {{error}}
     p
       label(for="title") {{$t ("title")}}
-      input(type="text" name="title" id="title" v-model="title"  v-bind:class="{ 'error': errorsVar.titleHasError}")
+      input(type="text" name="title" id="title" v-model="title"  v-bind:class="{ 'error': errorsVar.title}")
     p
       label(for="description") {{$t ("description")}}  
-      input(type="text" name="description" id="description" v-model="description"  v-bind:class="{ 'error': errorsVar.descriptionHasError}")
+      input(type="text" name="description" id="description" v-model="description"  v-bind:class="{ 'error': errorsVar.description}")
     p
       input(type="submit" name="save_button" v-html="$t('send')")

@@ -25,7 +25,7 @@ export default Vue.extend({
           password: this.password
         }
       }).then(response => {
-        localStorage.setItem('token', response.session.jwt);
+        localStorage.setItem('groceries_token', response.session.jwt);
         this.$store.dispatch('saveUser', {
           token: response.session.jwt,
           email: response.session.email,
@@ -39,10 +39,6 @@ export default Vue.extend({
           this.errors.push(Vue.i18n.t('loginPage.credentials'));
         }
       });
-    },
-    varReset() {
-      this.email = null;
-      this.password = null;
     },
     varErrorReset() {
       this.errors = [];
